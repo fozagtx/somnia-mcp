@@ -651,8 +651,8 @@ export const somniaTools: SomniaTool[] = [
   },
 
   {
-    name: "sign_message",
-    title: "Sign message",
+    name: "sign_certificate",
+    title: "Sign Certificate",
     description:
       "Create and sign a canonical certificate. Includes purpose, payload, domain, timestamp, nonce, and expiresAt.",
     inputSchema: {
@@ -714,9 +714,9 @@ export const somniaTools: SomniaTool[] = [
   },
 
   {
-    name: "sign_transaction",
-    title: "Sign transaction",
-    description: "Sign an Ethereum transaction.",
+    name: "sign_raw_transaction",
+    title: "Sign Raw Transaction",
+    description: "Sign an Ethereum raw transaction string.",
     inputSchema: {
       rawTransaction: z.string(),
     },

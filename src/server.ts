@@ -107,10 +107,8 @@ export async function start() {
   if (useStdIO) {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.log("Somnia MCP Server running on stdio");
-    console.log(
-      `Mode: ${process.env.ENVIRONMENT === "MAINNET" ? "Mainnet" : "Testnet"}`,
-    );
+    // Stdio mode - no console.log to avoid breaking JSON-RPC protocol
+    // Use console.error for debugging if needed (stderr won't break stdio)
     return;
   }
 

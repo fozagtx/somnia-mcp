@@ -6,7 +6,11 @@ import dotenv from "dotenv";
 import { somniaConfig } from "./config.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// Suppress dotenv logging (already loaded in index.ts, this is fallback)
+const originalLog = console.log;
+console.log = () => {};
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
+console.log = originalLog;
 
 export const currentEnvironment = process.env.ENVIRONMENT || "";
 export const isMainnet = currentEnvironment === "MAINNET";
