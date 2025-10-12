@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "somniaMcpStdio": {
+      "command": "node",
+      "type": "stdio",
+      "args": ["/ABSOLUTE/PATH/TO/PARENT/somnia-mcp-server/dist/index.js"],
+      "env": {
+        "AGENT_SECRET_KEY": "<YOUR_AGENT_SECRET_KEY>",
+        "ENVIRONMENT": "MAINNET",
+        "USE_STREAMABLE_HTTP": "false"
+      }
+    }
+  }
+}
