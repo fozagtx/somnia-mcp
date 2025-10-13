@@ -2,7 +2,7 @@
   "mcpServers": {
     "somniaMcpStreamableHttp": {
       "type": "streamable-http",
-      "url": "<YOUR_MCP_URL>/mcp",
+      "url": "https://server.smithery.ai/@fozagtx/somnia-mcp/mcp",
       "env": {
         "AGENT_SECRET_KEY": "<YOUR_AGENT_SECRET_KEY>",
         "ENVIRONMENT": "MAINNET",

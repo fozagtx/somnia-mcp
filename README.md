@@ -140,6 +140,14 @@ docker run -p 3000:3000 --env-file .env somnia-mcp-server
 
 ---
 
+## 🚀 Deployment
+
+For deployment instructions to Smithery or other platforms, see **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
+
+**Important:** Ensure `AGENT_SECRET_KEY` is set as an environment variable in your deployment platform, not hardcoded in the Dockerfile.
+
+---
+
 ## 📚 Resources
 
 - 📖 [Somnia Documentation](https://docs.somnia.network/)

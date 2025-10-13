@@ -5,7 +5,7 @@
       "type": "stdio",
       "args": ["/ABSOLUTE/PATH/TO/PARENT/somnia-mcp-server/dist/index.js"],
       "env": {
-        "AGENT_SECRET_KEY": "0xf640d7edd514b1ca3498788b657199834f7f729ee5bc215f13f66b0121b494f8",
+        "AGENT_SECRET_KEY": "your wallet private key",
         "ENVIRONMENT": "TESTNET",
         "USE_STREAMABLE_HTTP": "false"
       }
