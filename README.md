@@ -10,15 +10,15 @@ Model Context Protocol (MCP) server that enables AI agents like Claude to intera
 
 ## Features
 
-- 📚 Official Somnia documentation search
-- 🔍 Blockchain queries (accounts, transactions, blocks)
-- 💼 Wallet management and creation
-- ✍️ Cryptographic signing operations
-- 🤖 On-chain tools via GOAT SDK
+- Official Somnia documentation search
+- Blockchain queries (accounts, transactions, blocks)
+- Wallet management and creation
+- Cryptographic signing operations
+- On-chain tools via GOAT SDK
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -37,7 +37,7 @@ pnpm build
 
 ---
 
-## 📖 Usage
+## Usage
 
 ### Development Mode
 
@@ -71,7 +71,7 @@ pnpm clean
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -94,7 +94,7 @@ See `.env.example` for a template.
 
 ---
 
-## 🌐 Network Information
+## Network Information
 
 ### Mainnet
 
@@ -112,7 +112,7 @@ See `.env.example` for a template.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 somnia/
@@ -132,7 +132,7 @@ somnia/
 
 ---
 
-## 🐳 Docker Support
+## Docker Support
 
 Build and run with Docker:
 
@@ -146,14 +146,16 @@ docker run -p 3000:3000 --env-file .env somnia-mcp-server
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### MCP Server
+
 For deployment instructions to Smithery or other platforms, see **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
 
 **Important:** Ensure `AGENT_SECRET_KEY` is set as an environment variable in your deployment platform, not hardcoded in the Dockerfile.
 
 ### Documentation Site
+
 The `docs/` folder contains a static HTML documentation site. For hosting instructions, see **[docs/HOSTING.md](./docs/HOSTING.md)**.
 
 **Quick Deploy:**
@@ -164,17 +166,17 @@ The `docs/` folder contains a static HTML documentation site. For hosting instru
 
 ---
 
-## 📚 Resources
+## Resources
 
-- 📖 [Somnia Documentation](https://docs.somnia.network/)
-- 🔗 [Somnia Explorer](https://somniascan.io)
-- 💬 [Somnia Discord](https://discord.gg/somnia)
-- 🐦 [Somnia Twitter](https://twitter.com/somnianetwork)
-- 📘 [Model Context Protocol](https://modelcontextprotocol.io/)
+- [Somnia Documentation](https://docs.somnia.network/)
+- [Somnia Explorer](https://somniascan.io)
+- [Somnia Discord](https://discord.gg/somnia)
+- [Somnia Twitter](https://twitter.com/somnianetwork)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 
@@ -186,15 +188,15 @@ Contributions are welcome! Please:
 
 ---
 
-## 📝 License
+## License
 
 MIT License
 
 ---
 
-## 🔒 Security Considerations
+## Security Considerations
 
-⚠️ **Important Security Notes:**
+**Important Security Notes:**
 
 1. **Private Keys:** Never commit your `AGENT_SECRET_KEY` to version control
 2. **Environment Variables:** Use secure secret management for production
@@ -203,7 +205,7 @@ MIT License
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Build Errors
 
