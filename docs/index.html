@@ -387,8 +387,20 @@
                     href="https://github.com/fozagtx/somnia-mcp"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >GitHub Repository</a
+                    style="display: inline-flex; align-items: center; gap: 8px"
                 >
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                    >
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                        />
+                    </svg>
+                    GitHub Repository
+                </a>
             </section>
 
             <div id="tab-docs" role="tabpanel">
@@ -398,6 +410,69 @@
                         Register the server in your MCP-aware host
                         configuration.
                     </p>
+
+                    <details
+                        style="
+                            margin: 16px 0;
+                            padding: 12px;
+                            border: 1px solid var(--border);
+                            border-radius: 8px;
+                            background: var(--panel);
+                        "
+                    >
+                        <summary
+                            style="
+                                cursor: pointer;
+                                font-weight: 600;
+                                color: var(--brand);
+                            "
+                        >
+                            Important: Wallet Configuration Required
+                        </summary>
+                        <div style="margin-top: 12px; line-height: 1.6">
+                            <p>
+                                This MCP server requires a wallet private key to
+                                perform on-chain operations (signing
+                                transactions, sending tokens, etc.).
+                            </p>
+                            <p style="margin-top: 8px">
+                                <strong
+                                    >⚠️ You must provide your own private
+                                    key:</strong
+                                >
+                            </p>
+                            <ul style="margin-left: 20px; margin-top: 8px">
+                                <li>
+                                    For <strong>local use</strong>: Set
+                                    <code>AGENT_SECRET_KEY</code> in your
+                                    <code>.env</code> file
+                                </li>
+                                <li>
+                                    For <strong>Claude Desktop</strong>: Add
+                                    <code>AGENT_SECRET_KEY</code> to the env
+                                    section in your config
+                                </li>
+                                <li>
+                                    For <strong>hosted deployment</strong>:
+                                    Configure as environment variable in your
+                                    platform
+                                </li>
+                            </ul>
+                            <p
+                                style="
+                                    margin-top: 8px;
+                                    color: var(--muted);
+                                    font-size: 0.9em;
+                                "
+                            >
+                                Format: <code>AGENT_SECRET_KEY=0x...</code> (66
+                                characters: 0x + 64 hex digits)<br />
+                                Security: Never share your private key. Use a
+                                test wallet for development.
+                            </p>
+                        </div>
+                    </details>
+
                     <div class="code" data-copy>
                         <div class="bar">
                             <span class="dot"></span><span class="dot"></span
@@ -407,11 +482,37 @@
   "mcpServers": {
     "somniaMcp": {
       "url": "https://server.smithery.ai/@fozagtx/somnia-mcp/mcp",
-      "type": "streamable-http"
+      "type": "streamable-http",
+      "env": {
+        "AGENT_SECRET_KEY": "0xYOUR_PRIVATE_KEY_HERE",
+        "ENVIRONMENT": "TESTNET"
+      }
     }
   }
 }</code></pre>
                         <button class="copy" title="Copy">Copy</button>
+                    </div>
+
+                    <div
+                        style="
+                            margin-top: 16px;
+                            padding: 12px;
+                            border-left: 3px solid var(--brand);
+                            background: color-mix(
+                                in oklab,
+                                var(--panel),
+                                transparent 20%
+                            );
+                        "
+                    >
+                        <p style="margin: 0; font-size: 0.9em">
+                            <strong>Note:</strong> Replace
+                            <code>0xYOUR_PRIVATE_KEY_HERE</code> with your
+                            actual Ethereum private key. Set
+                            <code>ENVIRONMENT</code> to <code>TESTNET</code> or
+                            <code>MAINNET</code> depending on which network you
+                            want to use.
+                        </p>
                     </div>
                 </div>
 
