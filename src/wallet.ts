@@ -1,11 +1,12 @@
-import { http, createWalletClient, type WalletClient, defineChain } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
+import { createWalletClient, http, defineChain, type WalletClient } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
 import { somniaConfig } from "./config.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // Suppress dotenv logging (already loaded in index.ts, this is fallback)
 const originalLog = console.log;
 console.log = () => {};
@@ -61,6 +62,19 @@ const somniaTestnet = defineChain({
 });
 
 export const somniaChain = isMainnet ? somniaMainnet : somniaTestnet;
+
+// Validate private key
+if (!agentSecretKey) {
+  throw new Error(
+    "AGENT_SECRET_KEY is not set in environment variables. Please check your .env file.",
+  );
+}
+
+if (!agentSecretKey.match(/^0x[0-9a-fA-F]{64}$/)) {
+  throw new Error(
+    `Invalid AGENT_SECRET_KEY format. Expected 0x followed by 64 hex characters, got: ${agentSecretKey.substring(0, 10)}...`,
+  );
+}
 
 export const account = privateKeyToAccount(agentSecretKey as `0x${string}`);
 
