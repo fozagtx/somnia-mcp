@@ -18,7 +18,7 @@ import { braveSearchTool, braveNewsSearchTool } from "./tools";
  *
  * @returns A configured LlmAgent instance specialized for web search and information retrieval
  */
-export const getSearchAgent = () => {
+export const getSearchAgent = async () => {
   const searchAgent = new LlmAgent({
     name: "search_agent",
     description:

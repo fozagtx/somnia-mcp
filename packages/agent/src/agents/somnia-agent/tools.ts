@@ -1,16 +1,15 @@
 import { createTool } from "@iqai/adk";
 import * as z from "zod";
-import fs from "fs/promises";
-import path from "path";
-import { WALLET_DATA_DIR } from "./config";
 
 /**
- * Tool to save wallet details to the filesystem
+ * Tool to save wallet details by sending them to Telegram
+ * This tool will be used in conjunction with the Telegram MCP SEND_MESSAGE tool
+ * The actual sending will be orchestrated by the agent
  */
 export const saveWalletTool = createTool({
   name: "save_wallet",
   description:
-    "Save wallet details (address, mnemonic, network) to the filesystem for future reference",
+    "Prepare wallet details (address, mnemonic, network) for sending to Telegram. Returns formatted message that should be sent via Telegram.",
   schema: z.object({
     address: z.string().describe("Wallet address"),
     mnemonic: z.string().describe("Wallet mnemonic phrase"),
@@ -21,134 +20,35 @@ export const saveWalletTool = createTool({
   }),
   fn: async ({ address, mnemonic, network, label }) => {
     try {
-      // Ensure wallet directory exists
-      await fs.mkdir(WALLET_DATA_DIR, { recursive: true });
+      const timestamp = new Date().toISOString();
+      const walletLabel = label || `Wallet ${timestamp}`;
 
-      // Create wallet filename with timestamp
-      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const filename = `wallet-${network.toLowerCase()}-${timestamp}.json`;
-      const filepath = path.join(WALLET_DATA_DIR, filename);
-
-      // Wallet data structure
-      const walletData = {
-        address,
-        mnemonic,
-        network,
-        label: label || `Wallet ${timestamp}`,
-        createdAt: new Date().toISOString(),
-      };
-
-      // Save wallet to file
-      await fs.writeFile(filepath, JSON.stringify(walletData, null, 2));
-
-      // Also maintain an index file
-      const indexPath = path.join(WALLET_DATA_DIR, "wallets-index.json");
-      let index: any[] = [];
-
-      try {
-        const indexContent = await fs.readFile(indexPath, "utf-8");
-        index = JSON.parse(indexContent);
-      } catch (error) {
-        // Index doesn't exist yet, that's ok
-      }
-
-      index.push({
-        address,
-        network,
-        label: walletData.label,
-        createdAt: walletData.createdAt,
-        filename,
-      });
-
-      await fs.writeFile(indexPath, JSON.stringify(index, null, 2));
+      // Format wallet details as a message
+      const message =
+        `🔐 **New Wallet Created**\n\n` +
+        `📛 **Label:** ${walletLabel}\n` +
+        `🌐 **Network:** ${network}\n` +
+        `📅 **Created:** ${timestamp}\n\n` +
+        `💼 **Address:**\n\`${address}\`\n\n` +
+        `🔑 **Mnemonic:**\n\`${mnemonic}\`\n\n` +
+        `⚠️ **IMPORTANT:** Keep this mnemonic phrase safe and never share it with anyone!`;
 
       return {
         success: true,
-        message: `Wallet saved successfully to ${filename}`,
-        filepath,
-        address,
+        message: message,
+        walletInfo: {
+          address,
+          network,
+          label: walletLabel,
+          createdAt: timestamp,
+        },
+        instruction:
+          "Use the SEND_MESSAGE tool from Telegram MCP to send this message to your configured chat/channel",
       };
     } catch (error) {
       return {
         success: false,
-        message: `Failed to save wallet: ${error instanceof Error ? error.message : "Unknown error"}`,
-      };
-    }
-  },
-});
-
-/**
- * Tool to list all saved wallets
- */
-export const listWalletsTool = createTool({
-  name: "list_wallets",
-  description: "List all saved wallets from the filesystem",
-  schema: z.object({}),
-  fn: async () => {
-    try {
-      const indexPath = path.join(WALLET_DATA_DIR, "wallets-index.json");
-
-      try {
-        const indexContent = await fs.readFile(indexPath, "utf-8");
-        const wallets = JSON.parse(indexContent);
-
-        return {
-          success: true,
-          wallets,
-          count: wallets.length,
-        };
-      } catch (error) {
-        return {
-          success: true,
-          wallets: [],
-          count: 0,
-          message: "No wallets found",
-        };
-      }
-    } catch (error) {
-      return {
-        success: false,
-        message: `Failed to list wallets: ${error instanceof Error ? error.message : "Unknown error"}`,
-      };
-    }
-  },
-});
-
-/**
- * Tool to get a specific wallet by address
- */
-export const getWalletTool = createTool({
-  name: "get_wallet",
-  description: "Retrieve a specific wallet by its address",
-  schema: z.object({
-    address: z.string().describe("Wallet address to retrieve"),
-  }),
-  fn: async ({ address }) => {
-    try {
-      const files = await fs.readdir(WALLET_DATA_DIR);
-      const walletFiles = files.filter((f) => f.startsWith("wallet-"));
-
-      for (const file of walletFiles) {
-        const filepath = path.join(WALLET_DATA_DIR, file);
-        const content = await fs.readFile(filepath, "utf-8");
-        const wallet = JSON.parse(content);
-
-        if (wallet.address.toLowerCase() === address.toLowerCase()) {
-          return {
-            success: true,
-            wallet,
-          };
-        }
-      }
-
-      return {
-        success: false,
-        message: `Wallet with address ${address} not found`,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        message: `Failed to retrieve wallet: ${error instanceof Error ? error.message : "Unknown error"}`,
+        message: `Failed to prepare wallet details: ${error instanceof Error ? error.message : "Unknown error"}`,
       };
     }
   },

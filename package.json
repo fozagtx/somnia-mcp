@@ -16,8 +16,10 @@
     "agent:dev": "pnpm --filter @somnia/agent dev",
     "agent:chat": "pnpm --filter @somnia/agent chat",
     "agent:interactive": "pnpm --filter @somnia/agent interactive",
+    "agent:web": "pnpm --filter @somnia/agent web",
     "start": "pnpm build && pnpm agent:chat",
-    "chat": "pnpm agent:chat"
+    "chat": "pnpm agent:chat",
+    "web": "pnpm agent:web"
   },
   "keywords": [
     "somnia",

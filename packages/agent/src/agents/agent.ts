@@ -1,11 +1,10 @@
 import { AgentBuilder } from "@iqai/adk";
 import { env } from "../env";
 import { getSearchAgent } from "./search-agent/agent";
-import { getTutorAgent } from "./TutorAgent/agent";
 import { getSomniaAgent } from "./somnia-agent/agent";
 
 export const getRootAgent = async () => {
-  const searchAgent = getSearchAgent();
+  const searchAgent = await getSearchAgent();
   const somniaAgent = await getSomniaAgent();
 
   return AgentBuilder.create("root_agent")

@@ -1,31 +1,21 @@
 import type { McpConfig } from "@iqai/adk";
 import path from "path";
-import os from "os";
-import fs from "fs";
 
-// Directory for storing wallet data
-export const WALLET_DATA_DIR = path.join(
-  os.homedir(),
-  ".somnia-agent",
-  "wallets",
-);
-
-// Ensure wallet directory exists on module load
-try {
-  fs.mkdirSync(WALLET_DATA_DIR, { recursive: true });
-} catch (error) {
-  console.error("Failed to create wallet directory:", error);
-}
-
-// Filesystem MCP Server Configuration
-export const filesystemMcpConfig: McpConfig = {
-  name: "Filesystem MCP Client",
+// Telegram MCP Server Configuration
+export const telegramMcpConfig: McpConfig = {
+  name: "Telegram MCP Client",
   description:
-    "MCP client for filesystem operations to store and manage wallet data",
+    "MCP client for Telegram bot operations to send wallet details and notifications",
   transport: {
     mode: "stdio",
-    command: "npx",
-    args: ["-y", "@modelcontextprotocol/server-filesystem", WALLET_DATA_DIR],
+    command: "pnpm",
+    args: ["dlx", "@iqai/mcp-telegram"],
+    env: {
+      TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || "",
+      PATH: process.env.PATH || "",
+      // Disable sampling to avoid bot polling conflicts
+      DISABLE_SAMPLING: "true",
+    },
   },
 };
 
