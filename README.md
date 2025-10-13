@@ -1,5 +1,11 @@
 # Somnia MCP Server
 
+<div align="center">
+  <img src="./docs/images/somnia.png" alt="Somnia Logo" width="200"/>
+</div>
+
+<br/>
+
 Model Context Protocol (MCP) server that enables AI agents like Claude to interact with the Somnia blockchain network.
 
 ## Features
@@ -142,9 +148,19 @@ docker run -p 3000:3000 --env-file .env somnia-mcp-server
 
 ## 🚀 Deployment
 
+### MCP Server
 For deployment instructions to Smithery or other platforms, see **[DEPLOYMENT.md](./DEPLOYMENT.md)**.
 
 **Important:** Ensure `AGENT_SECRET_KEY` is set as an environment variable in your deployment platform, not hardcoded in the Dockerfile.
+
+### Documentation Site
+The `docs/` folder contains a static HTML documentation site. For hosting instructions, see **[docs/HOSTING.md](./docs/HOSTING.md)**.
+
+**Quick Deploy:**
+- GitHub Pages (recommended)
+- Vercel: `vercel --prod`
+- Netlify: Drag & drop at https://app.netlify.com/drop
+- Surge: `cd docs && surge`
 
 ---
 
