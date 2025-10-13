@@ -1,5 +1,7 @@
 # Somnia MCP Server
 
+[![smithery badge](https://smithery.ai/badge/somnia-mcp)](https://smithery.ai/protos/somnia-mcp)
+
 Model Context Protocol (MCP) server that enables AI agents like Claude to interact with the Somnia blockchain network.
 
 ## Features
@@ -13,6 +15,14 @@ Model Context Protocol (MCP) server that enables AI agents like Claude to intera
 ---
 
 ## 🚀 Quick Start
+
+### Installing via Smithery
+
+To install Somnia MCP automatically via [Smithery](https://smithery.ai/protos/somnia-mcp):
+
+```bash
+npx -y @smithery/cli install somnia-mcp
+```
 
 ### Prerequisites
 
