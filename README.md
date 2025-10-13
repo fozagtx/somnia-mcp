@@ -1,45 +1,31 @@
-# Somnia Monorepo
+# Somnia MCP Server
 
-A monorepo containing the Somnia MCP Server and AI Agent for interacting with the Somnia blockchain.
-
-## 📦 Packages
-
-This monorepo contains the following packages:
-
-### [`@somnia/mcp-server`](./packages/mcp-server)
 Model Context Protocol (MCP) server that enables AI agents like Claude to interact with the Somnia blockchain network.
 
-**Features:**
+## Features
+
 - 📚 Official Somnia documentation search
 - 🔍 Blockchain queries (accounts, transactions, blocks)
 - 💼 Wallet management and creation
 - ✍️ Cryptographic signing operations
 - 🤖 On-chain tools via GOAT SDK
 
-### [`@somnia/agent`](./packages/agent)
-AI agent built with ADK (Agent Development Kit) for autonomous interactions with Somnia blockchain.
-
-**Features:**
-- 🤖 Interactive chat interface
-- 🔄 Advanced agent workflows
-- 🔗 Integration with MCP tools
-- 🎯 Custom agent implementations
-
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - pnpm 10.14.0+
 
 ### Installation
 
 ```bash
-# Install all dependencies
+# Install dependencies
 pnpm install
 
-# Build all packages
+# Build the project
 pnpm build
 ```
 
@@ -47,98 +33,34 @@ pnpm build
 
 ## 📖 Usage
 
-### MCP Server
+### Development Mode
 
 ```bash
-# Build the MCP server
-pnpm mcp:build
-
-# Start the MCP server
-pnpm mcp:start
-
 # Run in development mode
-pnpm mcp:dev
+pnpm dev
 ```
 
-For detailed MCP server documentation, see [`packages/mcp-server/README.md`](./packages/mcp-server/README.md).
-
-### Agent
+### Production Mode
 
 ```bash
-# Build the agent
-pnpm agent:build
-
-# Start the agent
-pnpm agent:start
-
-# Run in development mode
-pnpm agent:dev
-
-# Interactive chat mode
-pnpm agent:chat
-
-# Advanced interactive mode
-pnpm agent:interactive
-```
-
-For detailed agent documentation, see [`packages/agent/README.md`](./packages/agent/README.md).
-
----
-
-## 🏗️ Monorepo Structure
-
-```
-somnia/
-├── packages/
-│   ├── mcp-server/          # MCP Server package
-│   │   ├── src/             # Server source code
-│   │   ├── dist/            # Built output
-│   │   ├── package.json
-│   │   └── tsconfig.json
-│   │
-│   └── agent/               # AI Agent package
-│       ├── src/             # Agent source code
-│       ├── dist/            # Built output
-│       ├── package.json
-│       └── tsconfig.json
-│
-├── package.json             # Root workspace configuration
-├── pnpm-workspace.yaml      # pnpm workspace definition
-├── tsconfig.base.json       # Shared TypeScript config
-└── README.md                # This file
-```
-
----
-
-## 🛠️ Development Scripts
-
-### Root Level Commands
-
-```bash
-# Build all packages
+# Build the project
 pnpm build
 
-# Run all packages in development mode (parallel)
-pnpm dev
-
-# Clean all build artifacts and node_modules
-pnpm clean
+# Start the server
+pnpm start
 ```
 
-### Package-Specific Commands
+### Testing
 
 ```bash
-# MCP Server
-pnpm mcp:build          # Build MCP server
-pnpm mcp:start          # Start MCP server
-pnpm mcp:dev            # Development mode
+pnpm test
+```
 
-# Agent
-pnpm agent:build        # Build agent
-pnpm agent:start        # Start agent
-pnpm agent:dev          # Development mode
-pnpm agent:chat         # Interactive chat
-pnpm agent:interactive  # Advanced interactive mode
+### Clean Build
+
+```bash
+# Remove build artifacts
+pnpm clean
 ```
 
 ---
@@ -147,8 +69,7 @@ pnpm agent:interactive  # Advanced interactive mode
 
 ### Environment Variables
 
-#### MCP Server
-Create a `.env` file in `packages/mcp-server/`:
+Create a `.env` file in the root directory:
 
 ```bash
 # Network Configuration
@@ -163,24 +84,59 @@ PORT=3000                       # HTTP server port
 HOST=127.0.0.1                  # HTTP server host
 ```
 
-#### Agent
-Create a `.env` file in `packages/agent/` (see `packages/agent/.env.example`).
+See `.env.example` for a template.
 
 ---
 
 ## 🌐 Network Information
 
 ### Mainnet
+
 - **Chain ID:** 5031
 - **RPC URL:** https://api.infra.mainnet.somnia.network/
 - **Explorer:** https://somniascan.io
 - **Native Token:** STT
 
 ### Testnet
+
 - **Chain ID:** 50312
 - **RPC URL:** https://dream-rpc.somnia.network/
 - **Explorer:** https://testnet.somniascan.io
 - **Native Token:** STT (Testnet)
+
+---
+
+## 📁 Project Structure
+
+```
+somnia/
+├── src/                  # Server source code
+├── dist/                 # Built output
+├── .env                  # Environment variables (gitignored)
+├── .env.example          # Environment template
+├── package.json          # Dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
+├── Dockerfile            # Docker configuration
+├── .dockerignore         # Docker ignore patterns
+├── smithery.yaml         # Smithery configuration
+├── somnia-mcp-stdio.example.json           # STDIO mode config
+├── somnia-mcp-streamable-http.json         # HTTP mode config
+└── README.md             # This file
+```
+
+---
+
+## 🐳 Docker Support
+
+Build and run with Docker:
+
+```bash
+# Build Docker image
+docker build -t somnia-mcp-server .
+
+# Run container
+docker run -p 3000:3000 --env-file .env somnia-mcp-server
+```
 
 ---
 
@@ -208,7 +164,7 @@ Contributions are welcome! Please:
 
 ## 📝 License
 
-MIT License - see individual package LICENSE files for details.
+MIT License
 
 ---
 
@@ -230,19 +186,25 @@ MIT License - see individual package LICENSE files for details.
 ```bash
 # Clear all dependencies and rebuild
 pnpm clean
+rm -rf node_modules pnpm-lock.yaml
 pnpm install
 pnpm build
 ```
 
 ### Connection Issues
+
 - Verify RPC URLs are accessible
 - Check network environment (MAINNET vs TESTNET)
 - Ensure correct chain ID configuration
 
 ### Signing Failures
+
 - Verify `AGENT_SECRET_KEY` is correctly formatted (0x prefix)
 - Check private key has required permissions
 - Ensure sufficient balance for gas fees
+
+---
+
 <div align="center">
   <p>Made with ❤️ for the Somnia ecosystem</p>
 </div>

@@ -1,36 +1,45 @@
 {
-  "name": "@somnia/monorepo",
+  "name": "@somnia/mcp-server",
   "version": "1.0.0",
-  "private": true,
-  "description": "Somnia MCP Server and Agent Monorepo",
-  "packageManager": "pnpm@10.14.0",
+  "description": "Somnia MCP Server - Model Context Protocol server for Somnia blockchain",
+  "type": "module",
+  "main": "./dist/index.js",
   "scripts": {
-    "build": "pnpm -r build",
-    "dev": "pnpm -r --parallel dev",
-    "clean": "pnpm -r clean && rm -rf node_modules",
-    "mcp:build": "pnpm --filter @somnia/mcp-server build",
-    "mcp:start": "pnpm --filter @somnia/mcp-server start",
-    "mcp:dev": "pnpm --filter @somnia/mcp-server dev",
-    "agent:build": "pnpm --filter @somnia/agent build",
-    "agent:start": "pnpm --filter @somnia/agent start",
-    "agent:dev": "pnpm --filter @somnia/agent dev",
-    "agent:chat": "pnpm --filter @somnia/agent chat",
-    "agent:interactive": "pnpm --filter @somnia/agent interactive",
-    "agent:web": "pnpm --filter @somnia/agent web",
-    "start": "pnpm build && pnpm agent:chat",
-    "chat": "pnpm agent:chat",
-    "web": "pnpm agent:web"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', 0o755)\"",
+    "start": "node ./dist/index.js",
+    "dev": "npx @modelcontextprotocol/inspector tsx src/index.ts",
+    "dev:server": "tsx src/index.ts",
+    "clean": "rm -rf dist"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "somnia",
-    "blockchain",
     "mcp",
-    "agent",
-    "monorepo"
+    "blockchain",
+    "ethereum"
   ],
   "author": "",
   "license": "MIT",
+  "packageManager": "pnpm@10.14.0",
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.3",
+    "@types/node": "24.5.2",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "@goat-sdk/adapter-model-context-protocol": "0.2.11",
+    "@goat-sdk/core": "0.5.0",
+    "@goat-sdk/wallet-viem": "0.3.0",
+    "@modelcontextprotocol/sdk": "1.18.2",
+    "cors": "2.8.5",
+    "dotenv": "17.2.3",
+    "express": "5.1.0",
+    "viem": "2.37.11",
+    "zod": "3.25.76"
   }
 }

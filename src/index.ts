@@ -1,7 +1,7 @@
-import dotenv from "dotenv";
-import { start } from "./server.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
+import { start } from "./server.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
