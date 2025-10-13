@@ -1,6 +1,15 @@
 runtime: "container"
 build:
-  dockerfile: "Dockerfile"           # Path to your Dockerfile
-  dockerBuildPath: "."               # Docker build context
+  dockerfile: "Dockerfile" # Path to your Dockerfile
+  dockerBuildPath: "." # Docker build context
+
+# Environment variables (set AGENT_SECRET_KEY via Smithery dashboard for security)
+env:
+  ENVIRONMENT: "TESTNET"
+  USE_STREAMABLE_HTTP: "true"
+  PORT: "3000"
+  HOST: "0.0.0.0"
+  # AGENT_SECRET_KEY: Set this via Smithery dashboard as a secret variable
+
 startCommand:
   type: "http"
