@@ -2,11 +2,19 @@
 
 <div align="center">
   <img src="./docs/images/somnia.png" alt="Somnia Logo" width="200"/>
+  
+  <br/>
+  <br/>
+  
+  [![Built with Amazon Q Developer](https://img.shields.io/badge/Built%20with-Amazon%20Q%20Developer%20%7C%20Kiro-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/q/developer/)
+  
 </div>
 
 <br/>
 
 Model Context Protocol (MCP) server that enables AI agents like Claude to interact with the Somnia blockchain network.
+
+> **Built with Amazon Q Developer's Kiro** - This project was architected, designed, and documented using Kiro's AI-powered spec-driven development workflow, agent hooks, and intelligent code analysis. See [KIRO_DEVELOPMENT_PROCESS.md](./KIRO_DEVELOPMENT_PROCESS.md) for details.
 
 ## Features
 
@@ -173,6 +181,7 @@ The `docs/` folder contains a static HTML documentation site. For hosting instru
 - [Somnia Discord](https://discord.gg/somnia)
 - [Somnia Twitter](https://twitter.com/somnianetwork)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
+- [Amazon Q Developer](https://aws.amazon.com/q/developer/) - AI-powered development tool used to build this project
 
 ---
 
@@ -233,4 +242,5 @@ pnpm build
 
 <div align="center">
   <p>Made with ❤️ for the Somnia ecosystem</p>
+  <p>Built with 🤖 <a href="https://aws.amazon.com/q/developer/">Amazon Q Developer | Kiro</a></p>
 </div>
